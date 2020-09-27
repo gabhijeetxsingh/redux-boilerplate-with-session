@@ -1,0 +1,34 @@
+.users{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    margin: auto;
+}
+
+.users > .d-flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.users > .d-flex > .name-head {
+    border-right : 1px solid gray;
+    padding-right : 6px;
+}
+.users > .d-flex > .email-head {
+    padding-left : 6px;
+}
+
+.users > .user {
+    padding : 2px;
+    display: flex;
+    border: 1px solid gray;
+}
+
+.users > .user  > div:first-child {
+    border-right : 1px solid gray;
+    padding-right : 6px;
+}
+
+.users > .user > .email {
+    padding-left : 6px;
+}
