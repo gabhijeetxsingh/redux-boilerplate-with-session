@@ -26,7 +26,6 @@ const store = createStore(
 
 const validateSession = (session) => {
 	// check if your session is still valid
-	console.log(session)
 	return true;
 }
 const options = { refreshOnCheckAuth: true, redirectPath: '/', driver: 'COOKIES', validateSession };

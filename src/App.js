@@ -8,7 +8,7 @@ import {
 import { addUserData } from './redux/users/users.actions';
 
 function App(props) {
-  console.log(props)
+
   const addUser = (evt) => {
     if(evt && evt.preventDefault) {
       evt.preventDefault();
@@ -38,7 +38,6 @@ function App(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   const { session } = state;
   return {
     checked: session.checked,

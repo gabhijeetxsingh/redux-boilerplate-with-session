@@ -1,24 +1,46 @@
 import { sessionService } from 'redux-react-session';
 
-export const login = (user, history) => {
+const LoginApi = (data) => {
+    const email = "abhijeet@gmail.com";
+    const password = "test";
+
+    if(data.email === email && data.password === password) {
+      return {status : true ,token : "amsecrettoken", data, message : "Successfully loggedIn"}
+    }
+    else {
+      
+      return {status : false , message : "Check Id and password again"}
+    }
+}
+
+
+export const login = (data, history) => {
   
     return async () => {
       try{
 
-            const { token } = {token : "iamsecrettoken"}
-            await sessionService.saveSession({ token })
+            let result = LoginApi(data);
 
-            await sessionService.saveUser({name : "abhi"})
+            if(result.status) {
 
-            try {
-
-              //history.push('/');
-
-            }catch(err) {
-              console.log(err)
+              await sessionService.saveSession({ token : result.token })
+              
+              await sessionService.saveUser(result.data)
+              
+              try {
+                
+                history.push('/redux');
+                
+              }catch(err) {
+                console.log(err)
+              }
+              
+              return {isAuthorised : true, status : result.status, message: result.message};
             }
-
-            return {isAuthorised : true, userInfo : userInfo.data};
+            else {
+              
+              return {isAuthorised : false, status : result.status, message: result.message};
+            }
       }
       catch(err) {
         console.log(err)
@@ -28,9 +50,13 @@ export const login = (user, history) => {
   };
 }
 
+const logoutApi = () => {
+  return {message : "User has been logged out"}
+}
+
 export const logout = (history) => {
   return () => {
-    return loginApi.logout().then(() => {
+    return logoutApi().then((msg) => {
       sessionService.deleteSession();
       sessionService.deleteUser();
       history.push('/');
